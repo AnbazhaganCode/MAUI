@@ -17,68 +17,81 @@
                    Margin="0" />
         </Grid>
         <Label Text="" />
-        <!-- Open/close Dropdown area -->
-        <Frame HasShadow="True" BorderColor="White" Padding="10" CornerRadius="15" BackgroundColor="White">
-            <Grid>
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="ToggleDropdown" />
-                </Grid.GestureRecognizers>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <!-- Flag img -->
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+        <Grid Padding="20" RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-                <Label x:Name="SelectedLanguageLabelDefault" Text="Language" FontSize="26" VerticalOptions="Center" Grid.Column="0" />
+            <!-- Frame 1: Language Selector -->
+            <Frame HasShadow="True" BorderColor="White" Padding="10" CornerRadius="15" BackgroundColor="White"
+               Grid.Row="0">
+                <Grid>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ToggleDropdown" />
+                    </Grid.GestureRecognizers>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                <Image x:Name="SelectedFlagImage" Source="flag_one.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" HorizontalOptions="End"  Grid.Column="1" />
+                    <Label x:Name="SelectedLanguageLabelDefault" Text="Language" FontSize="26" VerticalOptions="Center" Grid.Column="0" />
 
-                <Label x:Name="SelectedLanguageLabel" Text="En" FontSize="20" VerticalOptions="Center" Grid.Column="2" />
+                    <Image x:Name="SelectedFlagImage" Source="flag_one.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" HorizontalOptions="End" Grid.Column="1" />
 
-                <Label x:Name="SelectedLanguageLabelSymbol" Text=">" FontSize="22" VerticalOptions="Center" HorizontalOptions="End" Grid.Column="3" />
-            </Grid>
+                    <Label x:Name="SelectedLanguageLabel" Text="En" FontSize="20" VerticalOptions="Center" Grid.Column="2" />
 
-        </Frame>
+                    <Label x:Name="SelectedLanguageLabelSymbol" Text=">" FontSize="22" VerticalOptions="Center" HorizontalOptions="End" Grid.Column="3" />
+                </Grid>
+            </Frame>
 
-        <!-- Dropdown list -->
-        <Frame x:Name="DropdownFrame" IsVisible="False" BorderColor="Transparent" CornerRadius="15" Padding="0" HasShadow="True"
-       WidthRequest="150" HeightRequest="100" HorizontalOptions="End" BackgroundColor="LightGray">
-            <CollectionView x:Name="DropdownList"
-                IsVisible="False"
-                SelectionMode="Single"
-                SelectionChanged="DropdownList_SelectionChanged"
-                BackgroundColor="White"
-                WidthRequest="150"
-                HeightRequest="100"
-                HorizontalOptions="End">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="10" ColumnSpacing="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{Binding FlagImage}" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
-                            <Label Text="{Binding Name}" FontSize="20" VerticalOptions="Center" Grid.Column="1" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Frame>
-        <Frame HasShadow="True" BorderColor="White" Padding="10" CornerRadius="15" BackgroundColor="White">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Image x:Name="LogInWithFaceIdImage" Source="flag_one.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" HorizontalOptions="Start"  Grid.Column="0" />
-                <Label x:Name="LogInWithFaceID" Text="Log in with face ID" FontSize="26" VerticalOptions="Center" Grid.Column="1" />
-                <Switch x:Name="MySwitch" Toggled="MySwitch_Toggled" IsToggled="True" Grid.Column="2" />
-            </Grid>
-        </Frame>
+            <!-- Frame 3: FaceID -->
+            <Frame HasShadow="True" BorderColor="White" Padding="10" CornerRadius="15" BackgroundColor="White"
+               Grid.Row="1">
+                <!-- margin to move below selector -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="LogInWithFaceIdImage" Source="flag_one.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="0" />
+                    <Label x:Name="LogInWithFaceID" Text="Log in with face ID" FontSize="26" VerticalOptions="Center" Grid.Column="1" />
+                    <Switch x:Name="MySwitch" Toggled="MySwitch_Toggled" IsToggled="True" Grid.Column="2" />
+                </Grid>
+            </Frame>
+
+            <!-- Frame 2: Dropdown - overlay on FaceID -->
+            <Frame x:Name="DropdownFrame" IsVisible="False" BorderColor="Transparent" CornerRadius="15" Padding="0" HasShadow="True"
+       WidthRequest="150" HeightRequest="100" HorizontalOptions="End" BackgroundColor="LightGray" Grid.Row="1" >
+
+                <CollectionView x:Name="DropdownList"
+                            IsVisible="True"
+                            SelectionMode="Single"
+                            SelectionChanged="DropdownList_SelectionChanged"
+                            BackgroundColor="White"
+                            WidthRequest="150"
+                            HeightRequest="100"
+                            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10" ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding FlagImage}" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
+                                <Label Text="{Binding Name}" FontSize="20" VerticalOptions="Center" Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
+
+        </Grid>
+
 
     </VerticalStackLayout>
 </ContentPage>
