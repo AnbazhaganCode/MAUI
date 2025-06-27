@@ -70,15 +70,14 @@
         <Frame HasShadow="True" BorderColor="White" Padding="10" CornerRadius="15" BackgroundColor="White">
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Image x:Name="LogInWithFaceIdImage" Source="flag_one.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" HorizontalOptions="Start"  Grid.Column="0" />
-                <Label x:Name="LogInWithFaceID" Text="Log in with face ID" FontSize="26" VerticalOptions="Center" Grid.Column="1" />
+                <Label x:Name="LogInWithFaceID" Text="Log in with face ID" FontSize="20" VerticalOptions="Center" HorizontalOptions="Start" Grid.Column="1" />
                 <Switch x:Name="MySwitch" Toggled="MySwitch_Toggled" IsToggled="True" Grid.Column="2" />
             </Grid>
         </Frame>
-
     </VerticalStackLayout>
 </ContentPage>
