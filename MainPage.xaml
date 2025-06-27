@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage"
+             BackgroundColor="LightGray"
+             Title="">
+
+    <VerticalStackLayout Padding="0" Spacing="0">
+        <!-- Top Header -->
+        <Grid BackgroundColor="Blue" Padding="0" HeightRequest="60">
+            <Label Text="Settings"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   TextColor="White"
+                   Margin="0" />
+        </Grid>
+        <Label Text="" />
+        <!-- Open/close Dropdown area -->
+        <Frame HasShadow="True" BorderColor="White" Padding="10" CornerRadius="15" BackgroundColor="White">
+            <Grid>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ToggleDropdown" />
+                </Grid.GestureRecognizers>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <!-- Flag img -->
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label x:Name="SelectedLanguageLabelDefault" Text="Language" FontSize="26" VerticalOptions="Center" Grid.Column="0" />
+
+                <Image x:Name="SelectedFlagImage" Source="flag_one.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" HorizontalOptions="End"  Grid.Column="1" />
+
+                <Label x:Name="SelectedLanguageLabel" Text="En" FontSize="20" VerticalOptions="Center" Grid.Column="2" />
+
+                <Label x:Name="SelectedLanguageLabelSymbol" Text=">" FontSize="22" VerticalOptions="Center" HorizontalOptions="End" Grid.Column="3" />
+            </Grid>
+
+        </Frame>
+
+        <!-- Dropdown list -->
+        <Frame x:Name="DropdownFrame" IsVisible="False" BorderColor="Transparent" CornerRadius="15" Padding="0" HasShadow="True"
+       WidthRequest="150" HeightRequest="100" HorizontalOptions="End" BackgroundColor="LightGray">
+            <CollectionView x:Name="DropdownList"
+                IsVisible="False"
+                SelectionMode="Single"
+                SelectionChanged="DropdownList_SelectionChanged"
+                BackgroundColor="White"
+                WidthRequest="150"
+                HeightRequest="100"
+                HorizontalOptions="End">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10" ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding FlagImage}" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
+                            <Label Text="{Binding Name}" FontSize="20" VerticalOptions="Center" Grid.Column="1" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Frame>
+        <Frame HasShadow="True" BorderColor="White" Padding="10" CornerRadius="15" BackgroundColor="White">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image x:Name="LogInWithFaceIdImage" Source="flag_one.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" HorizontalOptions="Start"  Grid.Column="0" />
+                <Label x:Name="LogInWithFaceID" Text="Log in with face ID" FontSize="26" VerticalOptions="Center" Grid.Column="1" />
+                <Switch x:Name="MySwitch" Toggled="MySwitch_Toggled" IsToggled="True" Grid.Column="2" />
+            </Grid>
+        </Frame>
+
+    </VerticalStackLayout>
+</ContentPage>
